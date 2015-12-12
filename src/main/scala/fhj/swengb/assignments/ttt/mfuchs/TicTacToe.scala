@@ -173,32 +173,7 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * The game is over if either of a player wins or there is a draw.
     */
   val gameOver : Boolean = {
-
-    def checkEquality(p1:Player,p2:Player,p3:Player):Boolean = {
-      if (p1 == p2 && p2 == p3) {true} else {false}
-    }
-
-    val a1 = moveHistory(TopLeft)
-    val a2 = moveHistory(TopCenter)
-    val a3 = moveHistory(TopRight)
-    val b1 = moveHistory(MiddleLeft)
-    val b2 = moveHistory(MiddleCenter)
-    val b3 = moveHistory(MiddleRight)
-    val c1 = moveHistory(BottomLeft)
-    val c2 = moveHistory(BottomCenter)
-    val c3 = moveHistory(BottomRight)
-
-    val g1 = checkEquality(a1,a2,a3)
-    val g2 = checkEquality(b1,b2,b3)
-    val g3 = checkEquality(c1,c2,c3)
-    val g4 = checkEquality(a1,b1,c1)
-    val g5 = checkEquality(a2,b2,c2)
-    val g6 = checkEquality(a3,b3,c3)
-    val g7 = checkEquality(a1,b2,c3)
-    val g8 = checkEquality(a3,b2,c1)
-
-    if(g1 == true || g2 == true || g3 == true || g4 == true || g5 == true || g6 == true || g7 == true || g8 == true || moveHistory.size == 9) {true} else {false}
-
+    if (winner != None) {true} else {false}
   }
 
   /**
@@ -223,7 +198,48 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     *
     * The set of moves contains all moves which contributed to the result.
     */
-  def winner: Option[(Player, Set[TMove])] = ???
+  def winner: Option[(Player, Set[TMove])] = {
+
+    def checkEquality(p1:Player,p2:Player,p3:Player):Option[Player] = {
+      if (p1 == p2 && p2 == p3) {Some(p1)} else {None}
+    }
+
+    val a1 = moveHistory(TopLeft)
+    val a2 = moveHistory(TopCenter)
+    val a3 = moveHistory(TopRight)
+    val b1 = moveHistory(MiddleLeft)
+    val b2 = moveHistory(MiddleCenter)
+    val b3 = moveHistory(MiddleRight)
+    val c1 = moveHistory(BottomLeft)
+    val c2 = moveHistory(BottomCenter)
+    val c3 = moveHistory(BottomRight)
+
+    val g1 = (a1,a2,a3)
+    val g2 = (b1,b2,b3)
+    val g3 = (c1,c2,c3)
+    val g4 = (a1,b1,c1)
+    val g5 = (a2,b2,c2)
+    val g6 = (a3,b3,c3)
+    val g7 = (a1,b2,c3)
+    val g8 = (a3,b2,c1)
+
+    val winninggames = List(g1,g2,g3,g4,g5,g6,g7,g8)
+
+    def detWinner():Option[Player] = {
+      winninggames match {
+        case (p1,p2,p3) => checkEquality(p1,p2,p3)
+        case _ => None
+      }
+    }
+
+    val stepsA = moveHistory.filter(_._2 == PlayerA).keySet
+    val stepsB = moveHistory.filter(_._2 == PlayerB).keySet
+
+    if (detWinner() == PlayerA) Some(PlayerA, stepsA)
+    else if (detWinner() == PlayerB) Some(PlayerB, stepsB)
+    else None
+
+  }
 
   /**
     * returns a copy of the current game, but with the move applied to the tic tac toe game.
