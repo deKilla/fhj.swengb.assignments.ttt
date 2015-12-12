@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.assignments.ttt.mfuchs.TickTackToeAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.assignments.ttt.mfuchs.TicTacToeAppController">
     <children>
         <Button fx:id="btn_A1" layoutX="100.0" layoutY="100.0" prefWidth="100.0" prefHeight="100.0" mnemonicParsing="false" onAction="#A1" />
         <Button fx:id="btn_A2" layoutX="200.0" layoutY="100.0" prefWidth="100.0" prefHeight="100.0" mnemonicParsing="false" onAction="#A2" />

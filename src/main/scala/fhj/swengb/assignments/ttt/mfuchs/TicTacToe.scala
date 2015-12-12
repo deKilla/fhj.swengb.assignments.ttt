@@ -155,20 +155,20 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
 }
 
 
-object TickTackToeApp {
+object TicTacToeApp {
   def main(args: Array[String]) {
-    Application.launch(classOf[TickTackToeApp], args: _*)
+    Application.launch(classOf[TicTacToeApp], args: _*)
   }
 }
 
-class TickTackToeApp extends Application {
+class TicTacToeApp extends Application {
 
   val Fxml = "/fhj/swengb/assignments/ttt/TicTacToeApp.fxml"
   val Css = "fhj/swengb/assignments/ttt/TicTacToeApp.css"
   val loader = new FXMLLoader(getClass.getResource(Fxml))
 
   override def start(stage: Stage): Unit = try {
-    stage.setTitle("Tick Tack Toe")
+    stage.setTitle("Tic Tac Toe")
     loader.load[Parent]() // side effect
     val scene = new Scene(loader.getRoot[Parent])
     stage.setScene(scene)
@@ -183,7 +183,7 @@ class TickTackToeApp extends Application {
 
 }
 
-class TickTackToeAppController {
+class TicTacToeAppController {
   @FXML private var btn_A1: Button = _
   @FXML private var btn_A2: Button = _
   @FXML private var btn_A3: Button = _
