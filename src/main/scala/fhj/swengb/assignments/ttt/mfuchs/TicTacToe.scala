@@ -182,12 +182,44 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     *
     * The game is over if either of a player wins or there is a draw.
     */
-  val gameOver : Boolean = ???
+  val gameOver : Boolean = {
+
+    def checkEquality(p1:Player,p2:Player,p3:Player):Boolean = {
+      if (p1 == p2 && p2 == p3) {true} else {false}
+    }
+
+    val a1 = moveHistory(TopLeft)
+    val a2 = moveHistory(TopCenter)
+    val a3 = moveHistory(TopRight)
+    val b1 = moveHistory(MiddleLeft)
+    val b2 = moveHistory(MiddleCenter)
+    val b3 = moveHistory(MiddleRight)
+    val c1 = moveHistory(BottomLeft)
+    val c2 = moveHistory(BottomCenter)
+    val c3 = moveHistory(BottomRight)
+
+    val g1 = checkEquality(a1,a2,a3)
+    val g2 = checkEquality(b1,b2,b3)
+    val g3 = checkEquality(c1,c2,c3)
+    val g4 = checkEquality(a1,b1,c1)
+    val g5 = checkEquality(a2,b2,c2)
+    val g6 = checkEquality(a3,b3,c3)
+    val g7 = checkEquality(a1,b2,c3)
+    val g8 = checkEquality(a3,b2,c1)
+
+    if(g1 == true || g2 == true || g3 == true || g4 == true || g5 == true || g6 == true || g7 == true || g8 == true) {true} else {false}
+
+  }
 
   /**
     * the moves which are still to be played on this tic tac toe.
     */
-  val remainingMoves: Set[TMove] = ???
+  val remainingMoves: Set[TMove] = {
+    val movesdone:Set[TMove] = moveHistory.keySet
+    val potentialmoves:Set[TMove] = Set(TopLeft,TopCenter,TopRight,MiddleLeft,MiddleCenter,MiddleRight,BottomLeft,BottomCenter,BottomRight)
+    val remainingmoves:Set[TMove] = potentialmoves.diff(movesdone)
+    remainingmoves
+  }
 
   /**
     * given a tic tac toe game, this function returns all
