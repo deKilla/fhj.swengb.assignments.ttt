@@ -7,6 +7,8 @@ import javafx.stage.Stage
 import javafx.fxml.{FXMLLoader, FXML}
 import javafx.scene.control.{Button}
 
+import fhj.swengb.assignments.ttt.mfuchs
+
 import scala.collection.Set
 import scala.util.control.NonFatal
 
@@ -71,7 +73,11 @@ object TicTacToe {
     * creates an empty tic tac toe game
     * @return
     */
-  def apply(): TicTacToe = ???
+  def apply(): TicTacToe = {
+    val moveHistory:Map[TMove,Player] = Map.empty[TMove,Player]
+    val ttt = TicTacToe(moveHistory)
+    ttt
+  }
 
   /**
     * For a given tic tac toe game, this function applies all moves to the game.
@@ -81,7 +87,20 @@ object TicTacToe {
     * @param moves
     * @return
     */
-  def play(t: TicTacToe, moves: Seq[TMove]): TicTacToe = ???
+  def play(t: TicTacToe, moves: Seq[TMove]): TicTacToe = {
+    def changePlayer(player:Player):Player = {
+      player match {
+        case PlayerA => PlayerB
+        case PlayerB => PlayerA
+      }
+    }
+    val nextPlayer = changePlayer(t.nextPlayer)
+    val movehistory = moves.foldLeft(Map.empty[TMove, Player])(
+      (map,value) => map + (value -> changePlayer(nextPlayer))
+    )
+    val game = TicTacToe(movehistory,changePlayer(movehistory.last._2))
+    game
+  }
 
   /**
     * creates all possible games.
@@ -164,7 +183,7 @@ object TicTacToeApp {
 class TicTacToeApp extends Application {
 
   val Fxml = "/fhj/swengb/assignments/ttt/TicTacToeApp.fxml"
-  val Css = "fhj/swengb/assignments/ttt/TicTacToeApp.css"
+  val Css = "fhj/swengb/assignments/ttt/TicTacToeApp.css" //TODO: css not working
   val loader = new FXMLLoader(getClass.getResource(Fxml))
 
   override def start(stage: Stage): Unit = try {
