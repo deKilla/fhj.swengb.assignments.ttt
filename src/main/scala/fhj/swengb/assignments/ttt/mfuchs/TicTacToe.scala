@@ -207,7 +207,7 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     val g7 = checkEquality(a1,b2,c3)
     val g8 = checkEquality(a3,b2,c1)
 
-    if(g1 == true || g2 == true || g3 == true || g4 == true || g5 == true || g6 == true || g7 == true || g8 == true) {true} else {false}
+    if(g1 == true || g2 == true || g3 == true || g4 == true || g5 == true || g6 == true || g7 == true || g8 == true || moveHistory.size == 9) {true} else {false}
 
   }
 
