@@ -134,7 +134,48 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     *
     * @return
     */
-  def asString(): String = ???
+  def asString(): String = {
+    val separator:String = "|---|---|---|\n"
+    val fields:Map[Int,String] = Map.empty[Int,String]
+
+    for (move <- moveHistory) {
+
+      val key:Int = move._1 match {
+        case TopLeft => 1
+        case TopCenter => 2
+        case TopRight => 3
+        case MiddleLeft => 4
+        case MiddleCenter => 5
+        case MiddleRight => 6
+        case BottomLeft => 7
+        case BottomCenter => 8
+        case BottomRight => 9
+      }
+
+      val player:String = move._2 match {
+        case PlayerA => "X"
+        case PlayerB => "0"
+        case _ => " "
+      }
+
+      fields + (key -> player)
+
+    }
+
+    val sortedfields = fields.toList.sortWith((x,y) => x._1 < y._1)
+
+    val finalstring:String = (
+      separator
+      + "| " + sortedfields(1)._2 + " | " + sortedfields(2)._2 + " | " + sortedfields(3)._2 + " |\n"
+      + separator
+      + "| " + sortedfields(4)._2 + " | " + sortedfields(5)._2 + " | " + sortedfields(6)._2 + " |\n"
+      + separator
+      + "| " + sortedfields(7)._2 + " | " + sortedfields(8)._2 + " | " + sortedfields(9)._2 + " |\n"
+      + separator
+      )
+
+    finalstring
+  }
 
   /**
     * is true if the game is over.
