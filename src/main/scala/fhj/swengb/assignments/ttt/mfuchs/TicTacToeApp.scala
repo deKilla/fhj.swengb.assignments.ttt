@@ -58,6 +58,7 @@ class TicTacToeAppController {
 
   def A1(): Unit = {
     btn_A1.setText("X")
+    println(TicTacToe.apply().turn(TopLeft,PlayerA).asString())
   }
 
   def A2(): Unit = {

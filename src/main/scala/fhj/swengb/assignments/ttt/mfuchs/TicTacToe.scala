@@ -204,6 +204,18 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
       if (p1 == p2 && p2 == p3) {Some(p1)} else {None}
     }
 
+    /*
+    if (moveHistory.contains(TopLeft)) {val a1 = moveHistory(TopLeft)}
+    if (moveHistory.contains(TopCenter)) {val a2 = moveHistory(TopCenter)}
+    if (moveHistory.contains(TopRight)) {val a3 = moveHistory(TopRight)}
+    if (moveHistory.contains(MiddleLeft)) {val b1 = moveHistory(MiddleLeft)}
+    if (moveHistory.contains(MiddleCenter)) {val b2 = moveHistory(MiddleCenter)}
+    if (moveHistory.contains(MiddleRight)) {val b3 = moveHistory(MiddleRight)}
+    if (moveHistory.contains(BottomLeft)) {val c1 = moveHistory(BottomLeft)}
+    if (moveHistory.contains(BottomCenter)) {val c2 = moveHistory(BottomCenter)}
+    if (moveHistory.contains(BottomRight)) {val c3 = moveHistory(BottomRight)}
+    */
+
     val a1 = moveHistory(TopLeft)
     val a2 = moveHistory(TopCenter)
     val a3 = moveHistory(TopRight)
@@ -225,11 +237,9 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
 
     val winninggames = List(g1,g2,g3,g4,g5,g6,g7,g8)
 
-    def detWinner():Option[Player] = {
-      winninggames match {
-        case (p1,p2,p3) => checkEquality(p1,p2,p3)
-        case _ => None
-      }
+    def detWinner():Unit = (winninggames).foreach { case game => {
+          checkEquality(game._1, game._2, game._3)
+        }
     }
 
     val stepsA = moveHistory.filter(_._2 == PlayerA).keySet
@@ -249,6 +259,10 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * @return
     */
   def turn(p: TMove, player: Player): TicTacToe = {
-    ???
+    if(player == PlayerA) {
+      TicTacToe(moveHistory.updated(p,player),PlayerB)
+    } else {
+      TicTacToe(moveHistory.updated(p,player),PlayerA)
+    }
   }
 }
