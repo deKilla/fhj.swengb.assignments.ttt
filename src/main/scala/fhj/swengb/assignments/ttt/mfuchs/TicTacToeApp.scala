@@ -56,41 +56,60 @@ class TicTacToeAppController {
 
   }
 
+  var game = TicTacToe()
+
   def A1(): Unit = {
-    btn_A1.setText("X")
-    println(TicTacToe.apply().turn(TopLeft,PlayerA).asString())
+    //btn_A1.setText("X")
+    game = game.turn(TopLeft, game.nextPlayer)
+    println(game.asString())
   }
 
   def A2(): Unit = {
-    btn_A2.setText("X")
+    //btn_A2.setText("X")
+    game = game.turn(TopCenter, game.nextPlayer)
+    println(game.asString())
   }
 
   def A3(): Unit = {
-    btn_A3.setText("X")
+    //btn_A3.setText("X")
+    game = game.turn(TopRight, game.nextPlayer)
+    println(game.asString())
   }
 
   def B1(): Unit = {
-    btn_B1.setText("X")
+    //btn_B1.setText("X")
+    game = game.turn(MiddleLeft, game.nextPlayer)
+    println(game.asString())
   }
 
   def B2(): Unit = {
-    btn_B2.setText("X")
+    //btn_B2.setText("X")
+    game = game.turn(MiddleCenter, game.nextPlayer)
+    println(game.asString())
   }
 
   def B3(): Unit = {
-    btn_B3.setText("X")
+    //btn_B3.setText("X")
+    game = game.turn(MiddleRight, game.nextPlayer)
+    println(game.asString())
   }
 
   def C1(): Unit = {
-    btn_C1.setText("X")
+    //btn_C1.setText("X")
+    game = game.turn(BottomLeft, game.nextPlayer)
+    println(game.asString())
   }
 
   def C2(): Unit = {
-    btn_C2.setText("X")
+    //btn_C2.setText
+    game = game.turn(BottomCenter, game.nextPlayer)
+    println(game.asString())
   }
 
   def C3(): Unit = {
-    btn_C3.setText("X")
+    //btn_C3.setText("X")
+    game = game.turn(BottomRight, game.nextPlayer)
+    println(game.asString())
   }
 
 }

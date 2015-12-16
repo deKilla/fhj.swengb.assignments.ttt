@@ -1,5 +1,6 @@
 package fhj.swengb.assignments.ttt.mfuchs
 
+import scala.collection.JavaConverters._
 import scala.collection.Set
 
 /**
@@ -84,11 +85,12 @@ object TicTacToe {
         case PlayerB => PlayerA
       }
     }
-    val nextPlayer = changePlayer(t.nextPlayer)
+
     val movehistory = moves.foldLeft(Map.empty[TMove, Player])(
-      (map,value) => map + (value -> changePlayer(nextPlayer))
+      (map,value) => map + (value -> changePlayer(t.nextPlayer))
     )
-    val game = TicTacToe(movehistory,changePlayer(movehistory.last._2))
+    val nextPlayer = changePlayer(movehistory.last._2)
+    val game = TicTacToe(movehistory,nextPlayer)
     game
   }
 
@@ -125,12 +127,14 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * @return
     */
   def asString(): String = {
-    val separator:String = "|---|---|---|\n"
-    val fields:Map[Int,String] = Map.empty[Int,String]
+
+    val separator:String = "+ - + - + - +\n"
+
+    var fields:Map[Int,String] = Map.empty[Int,String]
 
     for (move <- moveHistory) {
 
-      val key:Int = move._1 match {
+      val position:Int = move._1 match {
         case TopLeft => 1
         case TopCenter => 2
         case TopRight => 3
@@ -142,25 +146,34 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
         case BottomRight => 9
       }
 
-      val player:String = move._2 match {
-        case PlayerA => "X"
-        case PlayerB => "0"
+      val symbol:String = move._2 match {
+        case PlayerA => "x"
+        case PlayerB => "o"
         case _ => " "
       }
 
-      fields + (key -> player)
+      fields = fields + (position -> symbol)
 
     }
 
-    val sortedfields = fields.toList.sortWith((x,y) => x._1 < y._1)
+    val tl:String = if (fields.contains(1)) { fields(1) } else { " " }
+    val tc:String = if (fields.contains(2)) { fields(2) } else { " " }
+    val tr:String = if (fields.contains(3)) { fields(3) } else { " " }
+    val ml:String = if (fields.contains(4)) { fields(4) } else { " " }
+    val mc:String = if (fields.contains(5)) { fields(5) } else { " " }
+    val mr:String = if (fields.contains(6)) { fields(6) } else { " " }
+    val bl:String = if (fields.contains(7)) { fields(7) } else { " " }
+    val bc:String = if (fields.contains(8)) { fields(8) } else { " " }
+    val br:String = if (fields.contains(9)) { fields(9) } else { " " }
+
 
     val finalstring:String = (
       separator
-      + "| " + sortedfields(1)._2 + " | " + sortedfields(2)._2 + " | " + sortedfields(3)._2 + " |\n"
+      + "| " + tl + " | " + tc + " | " + tr + " |\n"
       + separator
-      + "| " + sortedfields(4)._2 + " | " + sortedfields(5)._2 + " | " + sortedfields(6)._2 + " |\n"
+      + "| " + ml + " | " + mc + " | " + mr + " |\n"
       + separator
-      + "| " + sortedfields(7)._2 + " | " + sortedfields(8)._2 + " | " + sortedfields(9)._2 + " |\n"
+      + "| " + bl + " | " + bc + " | " + br + " |\n"
       + separator
       )
 
@@ -173,7 +186,7 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * The game is over if either of a player wins or there is a draw.
     */
   val gameOver : Boolean = {
-    if (winner != None) {true} else {false}
+    if (moveHistory.size >= 5 && winner != None) {true} else {false}
   }
 
   /**
@@ -200,55 +213,122 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     */
   def winner: Option[(Player, Set[TMove])] = {
 
-    def checkEquality(p1:Player,p2:Player,p3:Player):Option[Player] = {
-      if (p1 == p2 && p2 == p3) {Some(p1)} else {None}
-    }
+  /*
+    val a1:Option[TMove] = if (moveHistory.contains(TopLeft)) Some(TopLeft) else None
+    val a2:Option[TMove] = if (moveHistory.contains(TopCenter)) Some(TopCenter) else None
+    val a3:Option[TMove] = if (moveHistory.contains(TopRight)) Some(TopRight) else None
+
+    val b1:Option[TMove] = if (moveHistory.contains(MiddleLeft)) Some(MiddleLeft) else None
+    val b2:Option[TMove] = if (moveHistory.contains(MiddleCenter)) Some(MiddleCenter) else None
+    val b3:Option[TMove] = if (moveHistory.contains(MiddleRight)) Some(MiddleRight) else None
+
+    val c1:Option[TMove] = if (moveHistory.contains(BottomLeft)) Some(BottomLeft) else None
+    val c2:Option[TMove] = if (moveHistory.contains(BottomCenter)) Some(BottomCenter) else None
+    val c3:Option[TMove] = if (moveHistory.contains(BottomRight)) Some(BottomRight) else None
+*/
 
     /*
-    if (moveHistory.contains(TopLeft)) {val a1 = moveHistory(TopLeft)}
-    if (moveHistory.contains(TopCenter)) {val a2 = moveHistory(TopCenter)}
-    if (moveHistory.contains(TopRight)) {val a3 = moveHistory(TopRight)}
-    if (moveHistory.contains(MiddleLeft)) {val b1 = moveHistory(MiddleLeft)}
-    if (moveHistory.contains(MiddleCenter)) {val b2 = moveHistory(MiddleCenter)}
-    if (moveHistory.contains(MiddleRight)) {val b3 = moveHistory(MiddleRight)}
-    if (moveHistory.contains(BottomLeft)) {val c1 = moveHistory(BottomLeft)}
-    if (moveHistory.contains(BottomCenter)) {val c2 = moveHistory(BottomCenter)}
-    if (moveHistory.contains(BottomRight)) {val c3 = moveHistory(BottomRight)}
+     val a1 = Option(moveHistory(TopLeft)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val a2 = Option(moveHistory(TopCenter)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val a3 = Option(moveHistory(TopRight)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val b1 = Option(moveHistory(MiddleLeft)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val b2 = Option(moveHistory(MiddleCenter)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val b3 = Option(moveHistory(MiddleRight)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val c1 = Option(moveHistory(BottomLeft)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val c2 = Option(moveHistory(BottomCenter)) match {
+       case Some(value) => value
+       case None => None
+     }
+
+     val c3 = Option(moveHistory(BottomRight)) match {
+       case Some(value) => value
+       case None => None
+     }
+
     */
+/*
+     val g1:List[Option[TMove]] = List(a1, a2, a3)
+     val g2:List[Option[TMove]] = List(b1, b2, b3)
+     val g3:List[Option[TMove]] = List(c1, c2, c3)
+     val g4:List[Option[TMove]] = List(a1, b1, c1)
+     val g5:List[Option[TMove]] = List(a2, b2, c2)
+     val g6:List[Option[TMove]] = List(a3, b3, c3)
+     val g7:List[Option[TMove]] = List(a1, b2, c3)
+     val g8:List[Option[TMove]] = List(a3, b2, c1)
+*/
+    /*
+     def detWinner(): Option[Player] = {
+       val winninggames = List(g1, g2, g3, g4, g5, g6, g7, g8)
+       for (game <- winninggames) {
+         val vwinner = if (game._1 == game._2 && game._2 == game._3 && game._1 != None && game._2 != None && game._3 != None) {
+           game._1
+         } else None
+         if (vwinner != None) {
+           scala.util.control.Breaks.break()
+         }
+         vwinner
+       }
+     }
 
-    val a1 = moveHistory(TopLeft)
-    val a2 = moveHistory(TopCenter)
-    val a3 = moveHistory(TopRight)
-    val b1 = moveHistory(MiddleLeft)
-    val b2 = moveHistory(MiddleCenter)
-    val b3 = moveHistory(MiddleRight)
-    val c1 = moveHistory(BottomLeft)
-    val c2 = moveHistory(BottomCenter)
-    val c3 = moveHistory(BottomRight)
-
-    val g1 = (a1,a2,a3)
-    val g2 = (b1,b2,b3)
-    val g3 = (c1,c2,c3)
-    val g4 = (a1,b1,c1)
-    val g5 = (a2,b2,c2)
-    val g6 = (a3,b3,c3)
-    val g7 = (a1,b2,c3)
-    val g8 = (a3,b2,c1)
-
-    val winninggames = List(g1,g2,g3,g4,g5,g6,g7,g8)
-
-    def detWinner():Unit = (winninggames).foreach { case game => {
-          checkEquality(game._1, game._2, game._3)
-        }
-    }
+*/
 
     val stepsA = moveHistory.filter(_._2 == PlayerA).keySet
     val stepsB = moveHistory.filter(_._2 == PlayerB).keySet
 
-    if (detWinner() == PlayerA) Some(PlayerA, stepsA)
-    else if (detWinner() == PlayerB) Some(PlayerB, stepsB)
+    val winninggames: List[Tuple3[TMove,TMove,TMove]] = List(
+      (TopLeft, TopCenter, TopRight),
+      (MiddleLeft,MiddleCenter,MiddleRight),
+      (BottomLeft,BottomCenter,BottomRight),
+      (TopLeft,MiddleLeft,BottomLeft),
+      (TopCenter,MiddleCenter,BottomCenter),
+      (TopRight,MiddleRight,BottomRight),
+      (TopLeft,MiddleCenter,BottomRight),
+      (TopRight,MiddleCenter,BottomLeft))
+
+      for (game <- winninggames) {
+        if (stepsA.contains(game._1) && stepsA.contains(game._2) && stepsA.contains(game._3)) {var winner = PlayerA}
+        else if (stepsB.contains(game._1) && stepsB.contains(game._2) && stepsB.contains(game._3)) {var winner = PlayerB}
+      }
+
+    if (winner == PlayerA) Some(PlayerA, stepsA)
+    else if (winner == PlayerB) Some(PlayerB, stepsB)
     else None
 
+    /*
+    winner match {
+      case PlayerA => Some(PlayerA, stepsA)
+      case PlayerB => Some(PlayerB, stepsB)
+      case _ => None
+    }
+   */
   }
 
   /**
@@ -259,10 +339,9 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * @return
     */
   def turn(p: TMove, player: Player): TicTacToe = {
-    if(player == PlayerA) {
-      TicTacToe(moveHistory.updated(p,player),PlayerB)
-    } else {
-      TicTacToe(moveHistory.updated(p,player),PlayerA)
+    player match {
+      case PlayerA => println("next Player is Player B"); TicTacToe(moveHistory + (p -> player),PlayerB)
+      case PlayerB => println("next Player is Player A"); TicTacToe(moveHistory + (p -> player),PlayerA)
     }
   }
 }
