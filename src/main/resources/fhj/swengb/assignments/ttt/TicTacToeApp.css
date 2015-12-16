@@ -1,5 +1,23 @@
 
-.button {
-    fx-background-insets:2,2,2,2;
-    fx-background-color: #23a;
+.root {
+    -fx-background: rgb(50,50,80);
+}
+
+
+.fieldbutton {
+    -fx-background-insets:2,2,2,2;
+    -fx-background-color: #23a;
+    -fx-text-fill:#fff;
+    -fx-font-size:30pt;
+    -fx-font-weight:bold;
+}
+
+.fieldbutton:disabled {
+    -fx-background-color: #129;
+    -fx-text-fill:#fff;
+}
+
+.winner {
+    -fx-font-size:20pt;
+    -fx-alignment:CENTER MIDDLE;
 }
