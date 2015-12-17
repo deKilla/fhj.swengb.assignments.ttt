@@ -88,13 +88,24 @@ class TicTacToeAppController {
 
   var game = TicTacToe()
 
-  def A1(): Unit = {
-    btn_A1.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(TopLeft, game.nextPlayer)
-    //println(game.asString())
-    btn_A1.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
+  def updategame(field:Button,currentgame:TicTacToe): TicTacToe = {
+    field.setText(if (currentgame.moveHistory.size % 2 == 0) "x" else "o")
+    val buttonid = field.getId.toString
+    val position:TMove = buttonid match {
+      case "btn_A1" => TopLeft
+      case "btn_A2" => TopCenter
+      case "btn_A3" => TopRight
+      case "btn_B1" => MiddleLeft
+      case "btn_B2" => MiddleCenter
+      case "btn_B3" => MiddleRight
+      case "btn_C1" => BottomLeft
+      case "btn_C2" => BottomCenter
+      case "btn_C3" => BottomRight
+    }
+    val updatedgame = currentgame.turn(position, currentgame.nextPlayer)
+    field.setDisable(true)
+    if (updatedgame.gameOver) {
+      if (updatedgame.winner.isDefined) lbl_winner.setText(updatedgame.winner.head._1.toString + " hat gewonnen") else lbl_winner.setText("unentschieden")
       btn_A1.setDisable(true)
       btn_A2.setDisable(true)
       btn_A3.setDisable(true)
@@ -105,159 +116,17 @@ class TicTacToeAppController {
       btn_C2.setDisable(true)
       btn_C3.setDisable(true)
     }
+    updatedgame
   }
 
-  def A2(): Unit = {
-    btn_A2.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(TopCenter, game.nextPlayer)
-    //println(game.asString())
-    btn_A2.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def A3(): Unit = {
-    btn_A3.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(TopRight, game.nextPlayer)
-    //println(game.asString())
-    btn_A3.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def B1(): Unit = {
-    btn_B1.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(MiddleLeft, game.nextPlayer)
-    //println(game.asString())
-    btn_B1.setDisable(true)
-    if (game.gameOver) buttons foreach(_.setDisable(true))
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def B2(): Unit = {
-    btn_B2.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(MiddleCenter, game.nextPlayer)
-    //println(game.asString())
-    btn_B2.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def B3(): Unit = {
-    btn_B3.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(MiddleRight, game.nextPlayer)
-    //println(game.asString())
-    btn_B3.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def C1(): Unit = {
-    btn_C1.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(BottomLeft, game.nextPlayer)
-    //println(game.asString())
-    btn_C1.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def C2(): Unit = {
-    btn_C2.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(BottomCenter, game.nextPlayer)
-    //println(game.asString())
-    btn_C2.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
-
-  def C3(): Unit = {
-    btn_C3.setText(if (game.moveHistory.size % 2 == 0) "x" else "o")
-    game = game.turn(BottomRight, game.nextPlayer)
-    //println(game.asString())
-    btn_C3.setDisable(true)
-    if (game.gameOver && game.winner.isDefined) {
-      lbl_winner.setText(game.winner.head._1.toString + " hat gewonnen")
-      btn_A1.setDisable(true)
-      btn_A2.setDisable(true)
-      btn_A3.setDisable(true)
-      btn_B1.setDisable(true)
-      btn_B2.setDisable(true)
-      btn_B3.setDisable(true)
-      btn_C1.setDisable(true)
-      btn_C2.setDisable(true)
-      btn_C3.setDisable(true)
-    }
-  }
+  def A1(): Unit = {val updatedgame = updategame(btn_A1,game); game = updatedgame}
+  def A2(): Unit = {val updatedgame = updategame(btn_A2,game); game = updatedgame}
+  def A3(): Unit = {val updatedgame = updategame(btn_A3,game); game = updatedgame}
+  def B1(): Unit = {val updatedgame = updategame(btn_B1,game); game = updatedgame}
+  def B2(): Unit = {val updatedgame = updategame(btn_B2,game); game = updatedgame}
+  def B3(): Unit = {val updatedgame = updategame(btn_B3,game); game = updatedgame}
+  def C1(): Unit = {val updatedgame = updategame(btn_C1,game); game = updatedgame}
+  def C2(): Unit = {val updatedgame = updategame(btn_C2,game); game = updatedgame}
+  def C3(): Unit = {val updatedgame = updategame(btn_C3,game); game = updatedgame}
 
 }

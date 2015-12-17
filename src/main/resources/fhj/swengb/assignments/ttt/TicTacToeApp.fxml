@@ -20,7 +20,7 @@
 
         <Button fx:id="btn_restart" layoutX="100.0" layoutY="450.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="300.0" styleClass="restart" text="restart" />
 
-        <Label fx:id="lbl_winner" layoutX="100.0" layoutY="510.0" prefWidth="300" styleClass="winner" text="" />
+        <Label fx:id="lbl_winner" layoutX="100.0" layoutY="520.0" prefWidth="300" styleClass="winner" text="" />
 
     </children>
 </AnchorPane>

@@ -186,7 +186,7 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * The game is over if either of a player wins or there is a draw.
     */
   val gameOver : Boolean = {
-    if (winner.isDefined || moveHistory.size == 9) {println("Spiel vorbei, " + winner.head._1 + " hat gewonnen"); true} else {false}
+    if (winner.isDefined || moveHistory.size == 9) {true} else {false}
   }
 
   /**
