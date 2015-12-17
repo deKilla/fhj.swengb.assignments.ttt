@@ -89,7 +89,7 @@ class TicTacToeAppController {
   var game = TicTacToe()
 
   def updategame(field:Button,currentgame:TicTacToe): TicTacToe = {
-    field.setText(if (currentgame.moveHistory.size % 2 == 0) "X" else "O")
+    field.setText(if (currentgame.moveHistory.size % 2 == 0) "■" else "□")
     val buttonid = field.getId.toString
     val position:TMove = buttonid match {
       case "btn_A1" => TopLeft
@@ -105,7 +105,7 @@ class TicTacToeAppController {
     val updatedgame = currentgame.turn(position, currentgame.nextPlayer)
     field.setDisable(true)
     if (updatedgame.gameOver) {
-      if (updatedgame.winner.isDefined) lbl_winner.setText(updatedgame.winner.head._1 match {case PlayerA => "X hat gewonnen" case PlayerB => "O hat gewonnen"}) else lbl_winner.setText("unentschieden")
+      if (updatedgame.winner.isDefined) lbl_winner.setText(updatedgame.winner.head._1 match {case PlayerA => "■ hat gewonnen" case PlayerB => "□ hat gewonnen"}) else lbl_winner.setText("unentschieden")
       btn_A1.setDisable(true)
       btn_A2.setDisable(true)
       btn_A3.setDisable(true)
@@ -130,23 +130,23 @@ class TicTacToeAppController {
   def C2(): Unit = {val updatedgame = updategame(btn_C2,game); game = updatedgame}
   def C3(): Unit = {val updatedgame = updategame(btn_C3,game); game = updatedgame}
 
-  def a1e(): Unit = {btn_A1.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def a1e(): Unit = {btn_A1.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def a1l(): Unit = {if (!btn_A1.isDisabled) btn_A1.setText("")}
-  def a2e(): Unit = {btn_A2.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def a2e(): Unit = {btn_A2.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def a2l(): Unit = {if (!btn_A2.isDisabled) btn_A2.setText("")}
-  def a3e(): Unit = {btn_A3.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def a3e(): Unit = {btn_A3.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def a3l(): Unit = {if (!btn_A3.isDisabled) btn_A3.setText("")}
-  def b1e(): Unit = {btn_B1.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def b1e(): Unit = {btn_B1.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def b1l(): Unit = {if (!btn_B1.isDisabled) btn_B1.setText("")}
-  def b2e(): Unit = {btn_B2.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def b2e(): Unit = {btn_B2.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def b2l(): Unit = {if (!btn_B2.isDisabled) btn_B2.setText("")}
-  def b3e(): Unit = {btn_B3.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def b3e(): Unit = {btn_B3.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def b3l(): Unit = {if (!btn_B3.isDisabled) btn_B3.setText("")}
-  def c1e(): Unit = {btn_C1.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def c1e(): Unit = {btn_C1.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def c1l(): Unit = {if (!btn_C1.isDisabled) btn_C1.setText("")}
-  def c2e(): Unit = {btn_C2.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def c2e(): Unit = {btn_C2.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def c2l(): Unit = {if (!btn_C2.isDisabled) btn_C2.setText("")}
-  def c3e(): Unit = {btn_C3.setText(game.nextPlayer match {case PlayerA => "X" case PlayerB => "O"})}
+  def c3e(): Unit = {btn_C3.setText(game.nextPlayer match {case PlayerA => "■" case PlayerB => "□"})}
   def c3l(): Unit = {if (!btn_C3.isDisabled) btn_C3.setText("")}
 
 
