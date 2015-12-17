@@ -88,8 +88,8 @@ class TicTacToeAppController {
 
   var game = TicTacToe()
 
-  val pa:String = "■"
-  val pb:String = "□"
+  val pa:String = "X"
+  val pb:String = "O"
 
   def updategame(field:Button,currentgame:TicTacToe): TicTacToe = {
     field.setText(if (currentgame.moveHistory.size % 2 == 0) pa else pb)
