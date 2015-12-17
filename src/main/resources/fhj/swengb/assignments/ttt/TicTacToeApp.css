@@ -8,19 +8,16 @@
     -fx-background-insets:0,0,0,0;
     -fx-background-color: #000;
     -fx-text-fill:#fff;
-    -fx-font-size:30pt;
-    -fx-font-weight:bold;
+    -fx-font-size:40pt;
     -fx-border-width:1px;
     -fx-border-color:#fff;
+    -fx-font-family: "Courier New";
+    -fx-padding: 0 0 0 0;
 }
 
-.fieldbutton:hover {
+.fieldbutton:hover, .restart:hover {
     -fx-text-fill:#555;
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#555 0%, #777 20%, #999 100%),
-            linear-gradient(#111, #222),
-            radial-gradient(center 50% 100%, radius 100%, #555, #000);
+    -fx-background-color: radial-gradient(center 50% 100%, radius 100%, #222, #000);
     -fx-background-radius: 5,4,3,5;
 }
 
@@ -29,17 +26,18 @@
 }
 
 .restart:hover {
-    -fx-background-color: #555;
     -fx-text-fill:#fff;
 }
 
 .fieldbutton:disabled {
     -fx-opacity: 1.0;
-    -fx-background-color: #555;
     -fx-text-fill:#fff;
+    -fx-background-color: radial-gradient(center 50% 0%, radius 100%, #555, #000);
+    -fx-background-radius: 5,4,3,5;
 }
 
 .winner {
     -fx-font-size:20pt;
     -fx-alignment:CENTER MIDDLE;
+    -fx-font-family: "Courier New";
 }
