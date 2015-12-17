@@ -8,15 +8,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.assignments.ttt.mfuchs.TicTacToeAppController">
     <children>
-        <Button fx:id="btn_A1" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#A1" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_A2" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" onAction="#A2" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_A3" layoutX="300.0" layoutY="100.0" mnemonicParsing="false" onAction="#A3" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_B1" layoutX="100.0" layoutY="200.0" mnemonicParsing="false" onAction="#B1" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_B2" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" onAction="#B2" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_B3" layoutX="300.0" layoutY="200.0" mnemonicParsing="false" onAction="#B3" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_C1" layoutX="100.0" layoutY="300.0" mnemonicParsing="false" onAction="#C1" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_C2" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#C2" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
-        <Button fx:id="btn_C3" layoutX="300.0" layoutY="300.0" mnemonicParsing="false" onAction="#C3" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_A1" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#A1" onMouseEntered="#a1e" onMouseExited="#a1l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_A2" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" onAction="#A2" onMouseEntered="#a2e" onMouseExited="#a2l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_A3" layoutX="300.0" layoutY="100.0" mnemonicParsing="false" onAction="#A3" onMouseEntered="#a3e" onMouseExited="#a3l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_B1" layoutX="100.0" layoutY="200.0" mnemonicParsing="false" onAction="#B1" onMouseEntered="#b1e" onMouseExited="#b1l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_B2" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" onAction="#B2" onMouseEntered="#b2e" onMouseExited="#b2l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_B3" layoutX="300.0" layoutY="200.0" mnemonicParsing="false" onAction="#B3" onMouseEntered="#b3e" onMouseExited="#b3l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_C1" layoutX="100.0" layoutY="300.0" mnemonicParsing="false" onAction="#C1" onMouseEntered="#c1e" onMouseExited="#c1l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_C2" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#C2" onMouseEntered="#c2e" onMouseExited="#c2l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
+        <Button fx:id="btn_C3" layoutX="300.0" layoutY="300.0" mnemonicParsing="false" onAction="#C3" onMouseEntered="#c3e" onMouseExited="#c3l" prefHeight="100.0" prefWidth="100.0" styleClass="fieldbutton" />
 
         <Button fx:id="btn_restart" layoutX="100.0" layoutY="450.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="300.0" styleClass="restart" text="restart" />
 
