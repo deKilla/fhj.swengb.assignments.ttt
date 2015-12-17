@@ -14,8 +14,18 @@
     -fx-border-color:#fff;
 }
 
+.fieldbutton:hover {
+    -fx-text-fill:#555;
+    -fx-background-color:#111;
+}
+
 .restart {
     -fx-font-size:20pt;
+}
+
+.restart:hover {
+    -fx-background-color: #555;
+    -fx-text-fill:#fff;
 }
 
 .fieldbutton:disabled {
