@@ -63,7 +63,7 @@ class TicTacToeAppController {
   }
 
   def restart(): Unit = {
-    game = TicTacToe()
+    game = TicTacToe(Map.empty,game.moveHistory.head._2 match { case PlayerA => PlayerB case PlayerB => PlayerA })
     btn_A1.setText("")
     btn_A2.setText("")
     btn_A3.setText("")
@@ -89,7 +89,12 @@ class TicTacToeAppController {
   var game = TicTacToe()
 
   def updategame(field:Button,currentgame:TicTacToe): TicTacToe = {
-    field.setText(if (currentgame.moveHistory.size % 2 == 0) "x" else "o")
+    if (currentgame.moveHistory.size > 0) {
+      currentgame.moveHistory.head._2 match {
+        case PlayerA => field.setText(if (currentgame.moveHistory.size % 2 == 0) "x" else "o")
+        case PlayerB => field.setText(if (currentgame.moveHistory.size % 2 == 0) "o" else "x")
+      }
+    }
     val buttonid = field.getId.toString
     val position:TMove = buttonid match {
       case "btn_A1" => TopLeft
@@ -116,6 +121,7 @@ class TicTacToeAppController {
       btn_C2.setDisable(true)
       btn_C3.setDisable(true)
     }
+    println(updatedgame.asString())
     updatedgame
   }
 

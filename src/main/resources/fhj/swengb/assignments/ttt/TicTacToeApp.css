@@ -16,7 +16,12 @@
 
 .fieldbutton:hover {
     -fx-text-fill:#555;
-    -fx-background-color:#111;
+    -fx-background-color:
+            #090a0c,
+            linear-gradient(#555 0%, #777 20%, #999 100%),
+            linear-gradient(#111, #222),
+            radial-gradient(center 50% 100%, radius 100%, #555, #000);
+    -fx-background-radius: 5,4,3,5;
 }
 
 .restart {
